@@ -557,5 +557,93 @@
             </div>
         </footer>
     </div>
+    
+    <script>
+        // 栏目数据数组
+        const sections = [
+            {
+                id: "chindows",
+                name: "Chindows操作系统",
+                description: "我们自主研发的操作系统，为用户提供稳定、高效的使用体验。Chindows操作系统融合了现代技术与用户友好的界面设计，满足您的日常计算需求。",
+                url: "https://lugui906.github.io/chin/",
+                buttonText: "访问 Chindows"
+            },
+            {
+                id: "fly",
+                name: "模拟飞行游戏",
+                description: "沉浸式飞行体验，让您感受天空的自由与挑战。我们的模拟飞行游戏采用先进的物理引擎，为您带来逼真的飞行感受和丰富的游戏内容。",
+                url: "https://lugui906.github.io/fly/",
+                buttonText: "开始飞行"
+            },
+            {
+                id: "cleaner",
+                name: "C盘清理专家",
+                description: "高效的系统清理工具，帮助您释放磁盘空间，提升系统性能。C盘清理专家能够智能识别并清理无用文件，让您的电脑运行更加流畅。",
+                url: "https://lugui906.github.io/lugui0962/",
+                buttonText: "立即清理"
+            }
+        ];
+        
+        // 动态生成导航栏
+        function generateNavigation() {
+            const navLinks = document.querySelector(".nav-links");
+            // 保留前三个固定链接（首页、关于我们、联系我们）
+            const fixedLinks = Array.from(navLinks.children).slice(0, 3);
+            // 清空导航栏
+            navLinks.innerHTML = "";
+            // 添加固定链接
+            fixedLinks.forEach(link => navLinks.appendChild(link));
+            // 添加产品链接
+            sections.forEach(section => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = section.url;
+                a.textContent = section.name;
+                li.appendChild(a);
+                navLinks.appendChild(li);
+            });
+        }
+        
+        // 动态生成主内容
+        function generateMainContent() {
+            const mainContent = document.querySelector(".main-content");
+            // 清空现有内容
+            mainContent.innerHTML = "";
+            // 添加新内容
+            sections.forEach((section, index) => {
+                const div = document.createElement("div");
+                div.className = "section";
+                div.innerHTML = `
+                    <h2>${index + 1}. ${section.name}</h2>
+                    <p>${section.description}</p>
+                    <a href="${section.url}" class="btn">${section.buttonText}</a>
+                `;
+                mainContent.appendChild(div);
+            });
+        }
+        
+        // 动态生成页脚链接
+        function generateFooterLinks() {
+            const productLinks = document.querySelector(".footer-column:nth-child(2) ul");
+            // 清空现有链接
+            productLinks.innerHTML = "";
+            // 添加新链接
+            sections.forEach(section => {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = section.url;
+                a.textContent = section.name;
+                li.appendChild(a);
+                productLinks.appendChild(li);
+            });
+        }
+        
+        // 页面加载时执行
+        window.addEventListener("DOMContentLoaded", () => {
+            generateNavigation();
+            generateMainContent();
+            generateFooterLinks();
+        });
+    </script>
 </body>
 </html>
